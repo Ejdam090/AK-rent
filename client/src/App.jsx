@@ -11,7 +11,7 @@ import StuffsPage from "./pages/StuffsPage";
 import StuffsForm from "./Components/StuffsForm";
 import StuffPage from "./pages/StuffPage";
 import BookingsPage from "./pages/BookingsPage";
-import BookingPage from "./pages/BookingPage";
+
 
 axios.defaults.baseURL = "http://127.0.0.1:4000";
 axios.defaults.withCredentials = true;
