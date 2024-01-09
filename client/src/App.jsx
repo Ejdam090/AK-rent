@@ -13,7 +13,7 @@ import StuffPage from "./pages/StuffPage";
 import BookingsPage from "./pages/BookingsPage";
 
 
-axios.defaults.baseURL = "https://ak-rentstuffs.onrender.com";
+axios.defaults.baseURL = "https://ak-rentstuffs.onrender.com:4000";
 axios.defaults.withCredentials = true;
 
 function App() {

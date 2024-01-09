@@ -8,7 +8,7 @@ export default function StuffImage({ stuff, index = 0, className = null }) {
   return (
     <img
       className={className}
-      src={"https://ak-rentstuffs.onrender.com/uploads/" + stuff.photos[index]}
+      src={"https://ak-rentstuffs.onrender.com:4000/uploads/" + stuff.photos[index]}
       alt="photos"
     />
   );

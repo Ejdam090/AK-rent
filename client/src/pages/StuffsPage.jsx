@@ -46,7 +46,7 @@ export default function StuffsPage() {
                   {stuf.photos.length && (
                     <img
                       className="object-cover"
-                      src={"https://ak-rentstuffs.onrender.com/uploads/" + stuf.photos[0]}
+                      src={"https://ak-rentstuffs.onrender.com:4000/uploads/" + stuf.photos[0]}
                       alt="photos"
                     />
                   )}
