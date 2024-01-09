@@ -48,7 +48,7 @@ export default function StuffPage() {
             stuff.photos.map((photo) => (
               <div key={photo}>
                 <img
-                  src={"http://localhost:4000/uploads/" + photo}
+                  src={"https://ak-rentstuffs.onrender.com/uploads/" + photo}
                   alt="Photo"
                 />
               </div>
@@ -68,7 +68,7 @@ export default function StuffPage() {
                 <img
                   onClick={() => setShowAllPhotos(true)}
                   className=" aspect-square object-cover cursor-pointer"
-                  src={"http://localhost:4000/uploads/" + stuff.photos[0]}
+                  src={"https://ak-rentstuffs.onrender.com/uploads/" + stuff.photos[0]}
                 />
               </div>
             )}
@@ -78,7 +78,7 @@ export default function StuffPage() {
               <img
                 onClick={() => setShowAllPhotos(true)}
                 className=" aspect-square object-cover cursor-pointer"
-                src={"http://localhost:4000/uploads/" + stuff.photos[1]}
+                src={"https://ak-rentstuffs.onrender.com/uploads/" + stuff.photos[1]}
               />
             )}
             <div className=" overflow-hidden">
@@ -86,7 +86,7 @@ export default function StuffPage() {
                 <img
                   onClick={() => setShowAllPhotos(true)}
                   className=" aspect-square object-cover cursor-pointer relative top-2"
-                  src={"http://localhost:4000/uploads/" + stuff.photos[2]}
+                  src={"https://ak-rentstuffs.onrender.com/uploads/" + stuff.photos[2]}
                 />
               )}
             </div>

@@ -18,7 +18,7 @@ export default function IndexPage() {
               {stuff.photos?.[0] && (
                 <img
                   className=" rounded-2xl object-cover aspect-square"
-                  src={"http://localhost:4000/uploads/" + stuff.photos[0]}
+                  src={"https://ak-rentstuffs.onrender.com/uploads/" + stuff.photos[0]}
                   alt="photo-image"
                 />
               )}
