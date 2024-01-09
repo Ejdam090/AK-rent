@@ -21,7 +21,7 @@ app.use("/uploads", express.static(__dirname + "/uploads"));
 app.use(
   cors({
     credentials: true,
-    origin: ["https://ak-rentstuffs.onrender.com", "https://659dbd1389a086609bd9aa91--whimsical-sawine-e7f083.netlify.app/"],
+    origin:  "https://659dbd1389a086609bd9aa91--whimsical-sawine-e7f083.netlify.app/",
   })
 );
 mongoose.connect(process.env.MONGO_URL);
