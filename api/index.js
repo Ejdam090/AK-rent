@@ -22,6 +22,7 @@ app.use(
   cors({
     credentials: true,
     origin:  "https://659dbd1389a086609bd9aa91--whimsical-sawine-e7f083.netlify.app/",
+    methods: "GET,PUT,POST,DELETE"
   })
 );
 mongoose.connect(process.env.MONGO_URL);
