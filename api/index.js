@@ -20,9 +20,9 @@ app.use(CookieParser());
 app.use("/uploads", express.static(__dirname + "/uploads"));
 app.use(
   cors({
-    credentials: true,
-    origin:  "https://659dbd1389a086609bd9aa91--whimsical-sawine-e7f083.netlify.app/",
-    methods: "GET,PUT,POST,DELETE"
+    origin:  ["https://ak-rent.vercel.app"],
+    methods: ["GET","PUT","POST","DELETE"],
+    credentials: true
   })
 );
 mongoose.connect(process.env.MONGO_URL);
