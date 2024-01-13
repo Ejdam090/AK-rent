@@ -13,7 +13,7 @@ import StuffPage from "./pages/StuffPage";
 import BookingsPage from "./pages/BookingsPage";
 
 
-axios.defaults.baseURL = "https://whimsical-sawine-e7f083.netlify.app";
+axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL;
 axios.defaults.withCredentials = true;
 
 function App() {
