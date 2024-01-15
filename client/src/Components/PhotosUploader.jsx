@@ -61,12 +61,8 @@ export default function PhotoUploader({ addedPhotos, onChange }) {
         {addedPhotos.length > 0 &&
           addedPhotos.map((link) => (
             <div key={link} className="relative h-32 flex">
-            <Image className="  rounded-2xl w-full object-cover  " src={} />
-              <img
-                className="  rounded-2xl w-full object-cover  "
-                src={ link}
-                alt="photos"
-              />
+            <Image className="  rounded-2xl w-full object-cover  " src={link} />
+              
               <button
                 onClick={(ev) => removePhoto(ev, link)}
                 className=" cursor-pointer absolute bottom-1 right-1 text-white bg-black bg-opacity-50 py-2 px-3 rounded-xl"
