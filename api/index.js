@@ -31,6 +31,8 @@ app.use(
 // mongodb://localhost:27017
 
 async function uploadToS3(path, originalFilename, mimetype){
+ return new Promise(async(resolve, reject) =>{
+
  
     const client = new S3Client({
       region:'eu-north-1',
@@ -51,7 +53,7 @@ async function uploadToS3(path, originalFilename, mimetype){
     ACL: 'public-read',
   }));
   return `https://${bucket}.s3.amazonaws.com/${newFileName}`;
-
+})
 }
 function getUserDataFromReq(req) {
   return new Promise((resolve, reject) => {
