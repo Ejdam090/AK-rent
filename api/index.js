@@ -23,7 +23,7 @@ app.use(CookieParser());
 app.use("/uploads", express.static(__dirname + "/uploads"));
 app.use(
   cors({
-    origin:  ["http:127.0.0.1:5173"],
+    origin:  ["http://127.0.0.1:5173"],
     credentials: true
   })
 );
@@ -33,7 +33,7 @@ app.use(
 async function uploadToS3(path, originalFilename, mimetype){
  
     const client = new S3Client({
-      region:'us-east-1',
+      region:'eu-north-1',
       credentials:{
         accessKeyId:process.env.S3_ACCESS_KEY,
         secretAccessKey:process.env.S3_SECRET_ACCESS_KEY

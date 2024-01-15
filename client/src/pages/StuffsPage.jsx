@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import AccountNav from "../Components/AccountNav";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Image from './../Components/Image';
 
 export default function StuffsPage() {
   const [stuff, setStuff] = useState([]);
