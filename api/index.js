@@ -23,7 +23,7 @@ app.use(CookieParser());
 app.use("/uploads", express.static(__dirname + "/uploads"));
 app.use(
   cors({
-    origin:  ["https://ak-rent.vercel.app","https:127.0.0.1:5173"],
+    origin:  ["https://ak-rentstuff.vercel.app/","https:127.0.0.1:5173"],
     methods: ["GET","PUT","POST","DELETE"],
     credentials: true
   })
