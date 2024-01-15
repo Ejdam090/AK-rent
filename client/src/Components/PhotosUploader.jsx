@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import Image from './Image';
 
 export default function PhotoUploader({ addedPhotos, onChange }) {
   const [photoLink, setPhotoLink] = useState("");
@@ -60,9 +61,10 @@ export default function PhotoUploader({ addedPhotos, onChange }) {
         {addedPhotos.length > 0 &&
           addedPhotos.map((link) => (
             <div key={link} className="relative h-32 flex">
+            <Image className="  rounded-2xl w-full object-cover  " src={} />
               <img
                 className="  rounded-2xl w-full object-cover  "
-                src={"https://ak-rentstuffs.onrender.com:4000/uploads/" + link}
+                src={ link}
                 alt="photos"
               />
               <button

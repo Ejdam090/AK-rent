@@ -1,3 +1,5 @@
+import Image from "./Image";
+
 export default function StuffImage({ stuff, index = 0, className = null }) {
   if (!stuff.photos?.length) {
     return "";
@@ -6,9 +8,9 @@ export default function StuffImage({ stuff, index = 0, className = null }) {
     className = "object-cover";
   }
   return (
-    <img
+    <Image
       className={className}
-      src={"https://ak-rentstuffs.onrender.com:4000/uploads/" + stuff.photos[index]}
+      src={stuff.photos[index]}
       alt="photos"
     />
   );
