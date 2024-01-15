@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import StuffWidget from "../Components/StuffWidget";
+import Image from "../Components/Image";
 
 export default function StuffPage() {
   const { id } = useParams();
@@ -47,8 +48,8 @@ export default function StuffPage() {
           {stuff?.photos?.length > 0 &&
             stuff.photos.map((photo) => (
               <div key={photo}>
-                <img
-                  src={"https://ak-rent-api.vercel.app/uploads/" + photo}
+                <Image
+                  src={ photo}
                   alt="Photo"
                 />
               </div>
@@ -65,28 +66,28 @@ export default function StuffPage() {
           <div className="">
             {stuff.photos?.[0] && (
               <div className="grid">
-                <img
+                <Image
                   onClick={() => setShowAllPhotos(true)}
                   className=" aspect-square object-cover cursor-pointer"
-                  src={"https://ak-rent-api.vercel.app/uploads/" + stuff.photos[0]}
+                  src={ stuff.photos[0]}
                 />
               </div>
             )}
           </div>
           <div className="grid ">
             {stuff.photos?.[1] && (
-              <img
+              <Image
                 onClick={() => setShowAllPhotos(true)}
                 className=" aspect-square object-cover cursor-pointer"
-                src={"https://ak-rent-api.vercel.app/uploads/" + stuff.photos[1]}
+                src={ stuff.photos[1]}
               />
             )}
             <div className=" overflow-hidden">
               {stuff.photos?.[2] && (
-                <img
+                <Image
                   onClick={() => setShowAllPhotos(true)}
                   className=" aspect-square object-cover cursor-pointer relative top-2"
-                  src={"https://ak-rent-api.vercel.app/uploads/" + stuff.photos[2]}
+                  src={stuff.photos[2]}
                 />
               )}
             </div>

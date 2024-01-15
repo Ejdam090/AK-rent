@@ -44,9 +44,9 @@ export default function StuffsPage() {
               <div className=" flex bg-gray-100 cursor-pointer bg-grey-100 p-4 my-2 gap-4 rounded-2xl ">
                 <div className=" flex w-32  h-32 bg-gray-300 grow shrink-0">
                   {stuf.photos.length && (
-                    <img
+                    <Image
                       className="object-cover"
-                      src={"https://ak-rentstuffs.onrender.com:4000/uploads/" + stuf.photos[0]}
+                      src={ stuf.photos[0]}
                       alt="photos"
                     />
                   )}
