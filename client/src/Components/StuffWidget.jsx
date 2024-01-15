@@ -29,7 +29,7 @@ export default function StuffWidget({ stuff }) {
       price: numberOfDays * stuff.dayCost,
     });
     const bookingId = response.data._id;
-    setRedirect(`/account/bookings/${bookingId}`);
+    setRedirect(`/account/bookings`);
   }
 
   if (redirect) {
