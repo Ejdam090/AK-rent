@@ -141,7 +141,7 @@ app.post("/api/upload-by-link", async (req, res) => {
     dest: `/tmp/`  + newName,
   });
   const url = await uploadToS3('/tmp/'+newName, newName, mime.lookup('/tmp/'+newName));
-  res.json(url);
+  res.status(200).json(url);
 });
 
 //endpoint upload photo from file
@@ -154,7 +154,7 @@ app.post("/api/upload", photosMiddleware.array('photos', 100), async (req, res) 
     const url = await uploadToS3(path, originalname, mimetype);
     uploadedFiles.push(url);
   }
-  res.json(uploadedFiles);
+  res.status(200).json(uploadedFiles);
 });
 /// endpoint add new stuffs
 
