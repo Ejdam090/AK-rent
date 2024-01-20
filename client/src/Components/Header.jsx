@@ -10,7 +10,7 @@ export default function Header() {
         <img className=" w-48 " src={LogoPage} alt="Logo" />
       </Link>
       <div className="flex  py-2 px-4 gap-2  ">
-        <p className="text-2xl font-headText">
+        <p className="md:text-2xl text-sm font-headText">
           Już dziś wypożycz najlepszej jakości sprzęt do swoich prac!
         </p>
       </div>

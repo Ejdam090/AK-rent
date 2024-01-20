@@ -62,7 +62,7 @@ export default function StuffPage() {
     <div className="mt-4 py-8 bg-gray-100  -mx-8 px-8  ">
       <h1 className="text-2xl font-bold mb-2">{stuff.title}</h1>
       <div className="relative">
-        <div className="grid gap-2 grid-cols-[2fr_1fr] rounded-3xl overflow-hidden ">
+        <div className="grid  gap-2 grid-cols-[2fr_1fr] rounded-3xl overflow-hidden ">
           <div className="">
             {stuff.photos?.[0] && (
               <div className="grid">

@@ -26,7 +26,7 @@ export default function IndexPage() {
             </div>
             <h2 className=" text-sm  leading-4 ">{stuff.title}</h2>
             <div className=" mt-1 ">
-              <span className=" font-bold mr-1">$ {stuff.dayCost}</span>
+              <span className=" font-bold mr-1"> {stuff.dayCost} zł</span>
               / doba
             </div>
           </Link>
