@@ -12,7 +12,6 @@ export default function StuffsForm() {
   const [addedPhotos, setAddedPhotos] = useState([]);
   const [description, setDescription] = useState("");
   const [perks, setPerks] = useState([]);
-  const [extraInfo, setExtraInfo] = useState("");
   const [checkIn, setCheckIn] = useState("");
   const [checkOut, setCheckOut] = useState("");
   const [redirect, setRedirect] = useState(false);
@@ -27,7 +26,6 @@ export default function StuffsForm() {
       setAddedPhotos(data.photos);
       setDescription(data.description);
       setPerks(data.perks);
-      setExtraInfo(data.extraInfo);
       setCheckIn(data.checkIn);
       setCheckOut(data.checkOut);
     });
@@ -40,7 +38,6 @@ export default function StuffsForm() {
       addedPhotos,
       description,
       perks,
-      extraInfo,
       checkIn,
       checkOut,
     };

@@ -167,7 +167,6 @@ app.post("/api/add-new-stuff", (req, res) => {
     addedPhotos,
     description,
     perks,
-    extraInfo,
     checkIn,
     checkOut,
   } = req.body;
@@ -182,7 +181,6 @@ app.post("/api/add-new-stuff", (req, res) => {
       photos: addedPhotos,
       description,
       perks,
-      extraInfo,
       checkIn,
       checkOut,
     });
@@ -200,7 +198,6 @@ app.put("/api/add-new-stuff", async (req, res) => {
     addedPhotos,
     description,
     perks,
-    extraInfo,
     checkIn,
     checkOut,
   } = req.body;
@@ -214,7 +211,6 @@ app.put("/api/add-new-stuff", async (req, res) => {
         photos: addedPhotos,
         description,
         perks,
-        extraInfo,
         checkIn,
         checkOut,
       });
