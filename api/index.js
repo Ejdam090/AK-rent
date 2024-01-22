@@ -30,30 +30,25 @@ app.use(
 
 // mongodb://localhost:27017
 
-async function uploadToS3(path, originalFilename, mimetype){
- return new Promise(async(resolve, reject) =>{
-
- 
-    const client = new S3Client({
-      region:'eu-north-1',
-      credentials:{
-        accessKeyId:process.env.S3_ACCESS_KEY,
-        secretAccessKey:process.env.S3_SECRET_ACCESS_KEY
-      }
-    });
- 
-  const parts = originalFilename.split(".");
-  const ext = parts[parts.length-1];
-  const newFileName = Date.now()+"."+ext;
+async function uploadToS3(path, originalFilename, mimetype) {
+  const client = new S3Client({
+    region: 'eu-north-1',
+    credentials: {
+      accessKeyId: process.env.S3_ACCESS_KEY,
+      secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
+    },
+  });
+  const parts = originalFilename.split('.');
+  const ext = parts[parts.length - 1];
+  const newFilename = Date.now() + '.' + ext;
   await client.send(new PutObjectCommand({
     Bucket: bucket,
     Body: fs.readFileSync(path),
-    Key: newFileName,
-    ContentType:mimetype,
+    Key: newFilename,
+    ContentType: mimetype,
     ACL: 'public-read',
   }));
-  return `https://${bucket}.s3.amazonaws.com/${newFileName}`;
-})
+  return `https://${bucket}.s3.amazonaws.com/${newFilename}`;
 }
 function getUserDataFromReq(req) {
   return new Promise((resolve, reject) => {
@@ -141,7 +136,7 @@ app.post("/api/upload-by-link", async (req, res) => {
     dest: `/tmp/`  + newName,
   });
   const url = await uploadToS3('/tmp/'+newName, newName, mime.lookup('/tmp/'+newName));
-  res.status(200).json(url);
+  res.json(url);
 });
 
 //endpoint upload photo from file
@@ -154,7 +149,7 @@ app.post("/api/upload", photosMiddleware.array('photos', 100), async (req, res) 
     const url = await uploadToS3(path, originalname, mimetype);
     uploadedFiles.push(url);
   }
-  res.status(200).json(uploadedFiles);
+  res.json(uploadedFiles);
 });
 /// endpoint add new stuffs
 

@@ -30,6 +30,7 @@ export default function PhotoUploader({ addedPhotos, onChange }) {
         onChange((prev) => {
           return [...prev, ...filenames];
         });
+        console.log(onchange)
       });
   }
   function removePhoto(ev, filename) {
@@ -40,7 +41,7 @@ export default function PhotoUploader({ addedPhotos, onChange }) {
     ev.preventDefault();
     onChange([filename, ...addedPhotos.filter((photo) => photo !== filename)]);
   }
-
+  console.log(addedPhotos);
   return (
     <>
       <div className="flex gap-2">
