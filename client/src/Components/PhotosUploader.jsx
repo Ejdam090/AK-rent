@@ -30,7 +30,7 @@ export default function PhotoUploader({ addedPhotos, onChange }) {
         onChange((prev) => {
           return [...prev, ...filenames];
         });
-        console.log(onchange)
+        
       });
   }
   function removePhoto(ev, filename) {

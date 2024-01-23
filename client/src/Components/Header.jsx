@@ -9,11 +9,12 @@ export default function Header() {
       <Link to={"/"} className="flex items-center gap-1">
         <img className=" w-48 " src={LogoPage} alt="Logo" />
       </Link>
-      <div className="flex  py-2 px-4 gap-2  ">
+      {/* <div className="flex  py-2 px-4 gap-2  ">
         <p className="md:text-2xl text-sm font-headText">
           Już dziś wypożycz najlepszej jakości sprzęt do swoich prac!
         </p>
-      </div>
+        
+      </div> */}
       <Link
         to={user ? "/account" : "/login"}
         className="flex border items-center border-gray-300 rounded-full h-12 py-2 px-4 gap-2 "
