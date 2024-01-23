@@ -25,7 +25,7 @@ export default function BookingsPage() {
               key={booking._id}
               className="flex gap-4 mt-4 bg-gray-200 overflow-hidden rounded-2xl "
             >
-              <div className="w-48">
+              <div className=" w-48 ">
                 <StuffImage stuff={booking.stuff} />
               </div>
               <div className=" py-4 pr-3 grow ">

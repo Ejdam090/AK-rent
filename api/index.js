@@ -182,6 +182,19 @@ app.post("/api/add-new-stuff", (req, res) => {
     res.json(placeDoc);
   });
 });
+app.get('/api/remove-stuff/:id', async (req, res)=> {
+  mongoose.connect(process.env.MONGO_URL);
+  const { token } = req.cookies;
+  const {id} = req.body;
+  jwt.verify(token, jwtSecret, {}, async (err, userData) =>{
+    if(err)throw err;
+    await Stuff.deleteOne(id);
+    res.json('deleted');
+    })
+  
+    
+
+  })
 
 app.put("/api/add-new-stuff", async (req, res) => {
 

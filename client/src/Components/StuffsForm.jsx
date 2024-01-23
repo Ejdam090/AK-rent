@@ -49,7 +49,6 @@ export default function StuffsForm() {
       setRedirect(true);
     } else {
       await axios.post("/add-new-stuff", stuffData);
-      console.log(stuffData);
       setRedirect(true);
     }
   }
