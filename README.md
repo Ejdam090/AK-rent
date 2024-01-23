@@ -1,4 +1,4 @@
 # About
 site in building
 # Live
-  [Live]((https://ak-rentstuff.vercel.app/)https://ak-rentstuff.vercel.app/)
+  [Ckeck out live site](https://ak-rentstuff.vercel.app/)
