@@ -69,13 +69,22 @@ app.get("/api/test", (req, res) => {
 app.post("/api/register", async (req, res) => {
   mongoose.connect(process.env.MONGO_URL);
   const { name, email, password } = req.body;
+  /// check if username already exist
+  const usernameCheck = await User.findOne({name})
+  if(usernameCheck)
+    return res.json({msg:"Ta nazwa użytkownika już istnieje!", status:false});
+
+    const emailCheck = await User.findOne({email});
+    if(emailCheck){
+      return res.json({msg: "Ten email jest już zajęty!", status: false});
+    }
   try {
     const userDoc = await User.create({
       name,
       email,
       password: bcrypt.hashSync(password, bcryptSalt),
     });
-    res.json(userDoc);
+    res.json({userDoc, status: true});
   } catch (e) {
     res.status(422).json(e);
   }
@@ -85,7 +94,9 @@ app.post("/api/login", async (req, res) => {
   mongoose.connect(process.env.MONGO_URL);
   const { email, password } = req.body;
   const userDoc = await User.findOne({ email });
-  if (userDoc) {
+  if (userDoc) 
+  {
+
     const passOk = bcrypt.compareSync(password, userDoc.password);
     if (passOk) {
       jwt.sign(
@@ -94,14 +105,14 @@ app.post("/api/login", async (req, res) => {
         {},
         (err, token) => {
           if (err) throw err;
-          res.cookie("token", token).json(userDoc);
+          res.cookie("token", token).json({userDoc, status:true});
         }
       );
     } else {
-      res.json("pass not ok");
+      res.json({msg: "Błędne hasło!", status: false});
     }
   } else {
-    res.json("not found");
+    res.json({msg:"błędny adres email!", status:false});
   }
 });
 ///profile endpoint
@@ -112,8 +123,8 @@ app.get("/api/profile", (req, res) => {
   if (token) {
     jwt.verify(token, jwtSecret, {}, async (err, userData) => {
       if (err) throw err;
-      const { name, email, _id } = await User.findById(userData.id);
-      res.json({ name, email, _id });
+      const { name, email, _id, isAdmin } = await User.findById(userData.id);
+      res.json({ name, email, _id, isAdmin });
     });
   } else {
     res.json(null);
@@ -271,6 +282,17 @@ app.get("/api/bookings", async (req, res) => {
   mongoose.connect(process.env.MONGO_URL);
   const userData = await getUserDataFromReq(req);
   res.json(await Booking.find({ user: userData.id }).populate("stuff"));
+});
+
+app.get("/api/bookings-admin", async (req, res) => {
+  mongoose.connect(process.env.MONGO_URL);
+  const userData = await getUserDataFromReq(req);
+  if(userData.isAdmin){
+  res.json(await Booking.find());
+}
+else{
+  res.json("Permission denied");
+}
 });
 
 app.listen(4000);
