@@ -12,8 +12,7 @@ export default function StuffsForm() {
   const [addedPhotos, setAddedPhotos] = useState([]);
   const [description, setDescription] = useState("");
   const [perks, setPerks] = useState([]);
-  const [checkIn, setCheckIn] = useState("");
-  const [checkOut, setCheckOut] = useState("");
+ 
   const [redirect, setRedirect] = useState(false);
   useEffect(() => {
     if (!id) {
@@ -26,8 +25,6 @@ export default function StuffsForm() {
       setAddedPhotos(data.photos);
       setDescription(data.description);
       setPerks(data.perks);
-      setCheckIn(data.checkIn);
-      setCheckOut(data.checkOut);
     });
   }, [id]);
   async function saveStuff(e) {
@@ -38,8 +35,6 @@ export default function StuffsForm() {
       addedPhotos,
       description,
       perks,
-      checkIn,
-      checkOut,
     };
     if (id) {
       await axios.put("/add-new-stuff", {

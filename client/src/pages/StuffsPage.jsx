@@ -5,7 +5,6 @@ import axios from "axios";
 import Image from './../Components/Image';
 
 
-{/* <Link to={"/account/stuffs/" + stuf._id} key={stuf._id}> */}
 export default function StuffsPage() {
   const [stuff, setStuff] = useState([]);
   useEffect(() => {

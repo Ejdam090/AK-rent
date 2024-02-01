@@ -1,12 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import AccountNav from "../Components/AccountNav";
 import axios from "axios";
 import StuffImage from "../Components/StuffImg";
 import { differenceInCalendarDays, format } from "date-fns";
 import { Link } from "react-router-dom";
+import { UserContext } from "../Context/Context";
 
 export default function BookingsPage() {
   const [bookings, setBookings] = useState([]);
+  const {user} = useContext(UserContext);
   useEffect(() => {
     axios.get("/bookings").then((response) => {
       setBookings(response.data);
@@ -108,6 +110,12 @@ export default function BookingsPage() {
                     )}
                   </p>
                 </div>
+                {user.isAdmin && (
+                  <div>
+                    ok
+                  
+                   </div>
+                )}
               </div>
             </Link>
           ))}
