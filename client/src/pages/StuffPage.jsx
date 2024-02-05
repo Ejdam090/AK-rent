@@ -48,10 +48,7 @@ export default function StuffPage() {
           {stuff?.photos?.length > 0 &&
             stuff.photos.map((photo) => (
               <div key={photo}>
-                <Image
-                  src={ photo}
-                  alt="Photo"
-                />
+                <Image src={photo} alt="Photo" />
               </div>
             ))}
         </div>
@@ -69,7 +66,7 @@ export default function StuffPage() {
                 <Image
                   onClick={() => setShowAllPhotos(true)}
                   className=" aspect-square object-cover cursor-pointer"
-                  src={ stuff.photos[0]}
+                  src={stuff.photos[0]}
                 />
               </div>
             )}
@@ -79,7 +76,7 @@ export default function StuffPage() {
               <Image
                 onClick={() => setShowAllPhotos(true)}
                 className=" aspect-square object-cover cursor-pointer"
-                src={ stuff.photos[1]}
+                src={stuff.photos[1]}
               />
             )}
             <div className=" overflow-hidden">
@@ -121,7 +118,6 @@ export default function StuffPage() {
             <h2 className="font-semibold text-2xl my-4 "> Opis</h2>
             {stuff.description}
           </div>
-         
         </div>
         <div>
           <StuffWidget stuff={stuff} />

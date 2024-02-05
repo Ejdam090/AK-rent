@@ -4,7 +4,7 @@ export function AccountNavAdmin ({linkClases}) {
 
 
     return(<>
-        <Link className={linkClases("bookings")} to={"/account/bookings"}>
+        <Link className={linkClases("bookings-admin-all")} to={"/account/bookings-admin-all"}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"

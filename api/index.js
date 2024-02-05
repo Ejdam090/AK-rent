@@ -6,25 +6,25 @@ const User = require("./models/Users");
 const jwt = require("jsonwebtoken");
 const CookieParser = require("cookie-parser");
 const imageDownloader = require("image-downloader");
-const {S3Client, PutObjectCommand} = require('@aws-sdk/client-s3')
+const { S3Client, PutObjectCommand } = require("@aws-sdk/client-s3");
 const fs = require("fs");
-const multer = require('multer');
+const multer = require("multer");
 const Stuff = require("./models/Stuffs.js");
 const Booking = require("./models/Booking.js");
-const mime = require('mime-types')
+const mime = require("mime-types");
 
 require("dotenv").config();
 const app = express();
 const bcryptSalt = bcrypt.genSaltSync(10);
 const jwtSecret = "fasefraw4r5r3wq45wdfgw34twdfg";
-const bucket = 'ejdam-rentstuff'
+const bucket = "ejdam-rentstuff";
 app.use(express.json());
 app.use(CookieParser());
 app.use("/uploads", express.static(__dirname + "/uploads"));
 app.use(
   cors({
-    origin:  ["http://127.0.0.1:5173"],
-    credentials: true
+    origin: ["http://127.0.0.1:5173"],
+    credentials: true,
   })
 );
 
@@ -32,22 +32,24 @@ app.use(
 
 async function uploadToS3(path, originalFilename, mimetype) {
   const client = new S3Client({
-    region: 'eu-north-1',
+    region: "eu-north-1",
     credentials: {
       accessKeyId: process.env.S3_ACCESS_KEY,
       secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
     },
   });
-  const parts = originalFilename.split('.');
+  const parts = originalFilename.split(".");
   const ext = parts[parts.length - 1];
-  const newFilename = Date.now() + '.' + ext;
-  await client.send(new PutObjectCommand({
-    Bucket: bucket,
-    Body: fs.readFileSync(path),
-    Key: newFilename,
-    ContentType: mimetype,
-    ACL: 'public-read',
-  }));
+  const newFilename = Date.now() + "." + ext;
+  await client.send(
+    new PutObjectCommand({
+      Bucket: bucket,
+      Body: fs.readFileSync(path),
+      Key: newFilename,
+      ContentType: mimetype,
+      ACL: "public-read",
+    })
+  );
   return `https://${bucket}.s3.amazonaws.com/${newFilename}`;
 }
 function getUserDataFromReq(req) {
@@ -61,7 +63,7 @@ function getUserDataFromReq(req) {
 
 /// endpoints
 app.get("/api/test", (req, res) => {
-  mongoose.connect(process.env.MONGO_URL)
+  mongoose.connect(process.env.MONGO_URL);
   res.json("test ok");
 });
 //pass mongo db nRl7uh0MfB9mrD7c login booking
@@ -70,21 +72,24 @@ app.post("/api/register", async (req, res) => {
   mongoose.connect(process.env.MONGO_URL);
   const { name, email, password } = req.body;
   /// check if username already exist
-  const usernameCheck = await User.findOne({name})
-  if(usernameCheck)
-    return res.json({msg:"Ta nazwa użytkownika już istnieje!", status:false});
+  const usernameCheck = await User.findOne({ name });
+  if (usernameCheck)
+    return res.json({
+      msg: "Ta nazwa użytkownika już istnieje!",
+      status: false,
+    });
 
-    const emailCheck = await User.findOne({email});
-    if(emailCheck){
-      return res.json({msg: "Ten email jest już zajęty!", status: false});
-    }
+  const emailCheck = await User.findOne({ email });
+  if (emailCheck) {
+    return res.json({ msg: "Ten email jest już zajęty!", status: false });
+  }
   try {
     const userDoc = await User.create({
       name,
       email,
       password: bcrypt.hashSync(password, bcryptSalt),
     });
-    res.json({userDoc, status: true});
+    res.json({ userDoc, status: true });
   } catch (e) {
     res.status(422).json(e);
   }
@@ -94,9 +99,7 @@ app.post("/api/login", async (req, res) => {
   mongoose.connect(process.env.MONGO_URL);
   const { email, password } = req.body;
   const userDoc = await User.findOne({ email });
-  if (userDoc) 
-  {
-
+  if (userDoc) {
     const passOk = bcrypt.compareSync(password, userDoc.password);
     if (passOk) {
       jwt.sign(
@@ -105,14 +108,14 @@ app.post("/api/login", async (req, res) => {
         {},
         (err, token) => {
           if (err) throw err;
-          res.cookie("token", token).json({userDoc, status:true});
+          res.cookie("token", token).json({ userDoc, status: true });
         }
       );
     } else {
-      res.json({msg: "Błędne hasło!", status: false});
+      res.json({ msg: "Błędne hasło!", status: false });
     }
   } else {
-    res.json({msg:"błędny adres email!", status:false});
+    res.json({ msg: "błędny adres email!", status: false });
   }
 });
 ///profile endpoint
@@ -144,38 +147,39 @@ app.post("/api/upload-by-link", async (req, res) => {
   const newName = "photo" + Date.now() + ".jpg";
   await imageDownloader.image({
     url: link,
-    dest: `/tmp/`  + newName,
+    dest: `/tmp/` + newName,
   });
-  const url = await uploadToS3('/tmp/'+newName, newName, mime.lookup('/tmp/'+newName));
+  const url = await uploadToS3(
+    "/tmp/" + newName,
+    newName,
+    mime.lookup("/tmp/" + newName)
+  );
   res.status(200).json(url);
 });
 
 //endpoint upload photo from file
-const photosMiddleware = multer({dest:'/tmp/'});
+const photosMiddleware = multer({ dest: "/tmp/" });
 
-app.post("/api/upload", photosMiddleware.array('photos', 100), async (req, res) => {
-  const uploadedFiles = [];
-  for (let i = 0; i < req.files.length; i++) {
-    const { path, originalname, mimetype } = req.files[i];
-    const url = await uploadToS3(path, originalname, mimetype);
-    uploadedFiles.push(url);
+app.post(
+  "/api/upload",
+  photosMiddleware.array("photos", 100),
+  async (req, res) => {
+    const uploadedFiles = [];
+    for (let i = 0; i < req.files.length; i++) {
+      const { path, originalname, mimetype } = req.files[i];
+      const url = await uploadToS3(path, originalname, mimetype);
+      uploadedFiles.push(url);
+    }
+    res.status(200).json(uploadedFiles);
   }
-  res.status(200).json(uploadedFiles);
-});
+);
 /// endpoint add new stuffs
 
 app.post("/api/add-new-stuff", (req, res) => {
   mongoose.connect(process.env.MONGO_URL);
   const { token } = req.cookies;
-  const {
-    title,
-    dayCost,
-    addedPhotos,
-    description,
-    perks,
-    checkIn,
-    checkOut,
-  } = req.body;
+  const { title, dayCost, addedPhotos, description, perks, checkIn, checkOut } =
+    req.body;
 
   jwt.verify(token, jwtSecret, {}, async (err, userData) => {
     if (err) throw err;
@@ -193,22 +197,18 @@ app.post("/api/add-new-stuff", (req, res) => {
     res.json(placeDoc);
   });
 });
-app.get('/api/remove-stuff/:id', async (req, res)=> {
+app.get("/api/remove-stuff/:id", async (req, res) => {
   mongoose.connect(process.env.MONGO_URL);
   const { token } = req.cookies;
-  const {id} = req.body;
-  jwt.verify(token, jwtSecret, {}, async (err, userData) =>{
-    if(err)throw err;
+  const { id } = req.body;
+  jwt.verify(token, jwtSecret, {}, async (err, userData) => {
+    if (err) throw err;
     await Stuff.deleteOne(id);
-    res.json('deleted');
-    })
-  
-    
-
-  })
+    res.json("deleted");
+  });
+});
 
 app.put("/api/add-new-stuff", async (req, res) => {
-
   const { token } = req.cookies;
   const {
     id,
@@ -286,13 +286,7 @@ app.get("/api/bookings", async (req, res) => {
 
 app.get("/api/bookings-admin", async (req, res) => {
   mongoose.connect(process.env.MONGO_URL);
-  const userData = await getUserDataFromReq(req);
-  if(userData.isAdmin){
-  res.json(await Booking.find());
-}
-else{
-  res.json("Permission denied");
-}
+  res.json(await Booking.find().populate("stuff").populate("user"));
 });
 
 app.listen(4000);
