@@ -110,12 +110,6 @@ export default function BookingsPage() {
                     )}
                   </p>
                 </div>
-                {user.isAdmin && (
-                  <div>
-                    ok
-                  
-                   </div>
-                )}
               </div>
             </Link>
           ))}
