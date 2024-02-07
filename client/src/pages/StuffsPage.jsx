@@ -65,7 +65,7 @@ export default function StuffsPage() {
 
               <div className="py-2 px-4 flex flex-col items-center w-26   ">
                 <button className=" p-2 w-full hover:bg-white transition-colors  rounded-xl">
-                  <Link to={"/account/stuffs/" + stuf._id}>Edytuj </Link>
+                  <Link to={`/account/stuffs/${stuf._id}`}>Edytuj </Link>
                 </button>
                 <button
                   onClick={(e) => removeStuff(e, stuf)}
